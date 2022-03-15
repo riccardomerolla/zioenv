@@ -14,6 +14,8 @@ object Main extends ZIOApp {
       ZLayer.succeed(DBConfig("jdbc://localhost"))
     )
 
-  override val run: ZIO[DB with Clock, Any, Any] =
-    UserRegistration.register(User("adam", "adam@hello.world")).map { u => println(s"Registered user: $u (layers)") }
+  override val run: ZIO[DB with Clock, Any, Any] = {
+    val repeat = (1 to 5).map(i => UserRegistration.register(User(s"adam$i", s"adam$i@hello.world")).map { u => println(s"Registered user: $u (layers)") })
+    ZIO.collectAllPar(repeat)
+  }
 }
