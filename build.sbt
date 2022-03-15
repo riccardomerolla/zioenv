@@ -16,6 +16,7 @@ lazy val core: Project = (project in file("core"))
   .settings(
     name := "core",
     libraryDependencies ++= Seq(
-      "dev.zio" %% "zio" % "2.0.0-RC1"
+      "dev.zio" %% "zio" % "2.0.0-RC2",
+      "dev.zio" %% "zio-kafka" % "2.0.0-M1"
     )
   )
